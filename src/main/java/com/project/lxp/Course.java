@@ -1,3 +1,5 @@
+package com.project.lxp;
+
 import java.lang.System.Logger.Level;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -13,13 +15,6 @@ public class Course {
     public LocalDateTime update_at;
     public LocalDateTime published_at;
 
-    enum Status{
-        DRAFT, PUBLISHED
-    }
-
-    enum Level{
-        BEGINNER, INTERMEDIATE, ADVANCED
-    }
 
 
 }
