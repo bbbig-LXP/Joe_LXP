@@ -1,9 +1,10 @@
-package com.project.lxp;
+package com.project.lxp.repository;
 
+import com.project.lxp.Course;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CourseRepository {
+public class InMemoryCourseRepository implements CourseRepository {
 
     // 1. '가짜 데이터베이스' 역할을 할 저장소를 만듭니다.
     //    - Key: 강좌의 ID (Long 타입)
@@ -21,14 +22,10 @@ public class CourseRepository {
      * @param course 저장할 강좌 객체 (아직 id가 없음)
      * @return id가 부여되고 저장된 강좌 객체
      */
+    @Override
     public Course save(Course course) {
-        // 3. '수첩'에 적힌 숫자(sequence)를 1 증가시킵니다.
-        //    그리고 그 새로운 번호를 course 객체의 id에 할당합니다.
-        //    ++sequence는 sequence = sequence + 1 과 같은 의미입니다.
-        course.id = ++sequence;
 
-        // 4. 완성된 course 객체를 '가짜 DB'(store)에 저장합니다.
-        //    map.put(key, value) 메서드를 사용합니다.
+        course.setId();
         store.put(course.id, course);
 
         // 5. 저장이 완료된 course 객체를 반환하여,
@@ -41,6 +38,7 @@ public class CourseRepository {
      * @param id 찾고 싶은 강좌의 ID
      * @return 찾은 강좌 객체. 없으면 null을 반환합니다.
      */
+    @Override
     public Course findById(Long id) {
         // 6. '가짜 DB'(store)에서 id를 key로 가지는 값을 찾아 반환합니다.
         //    map.get(key) 메서드를 사용합니다.

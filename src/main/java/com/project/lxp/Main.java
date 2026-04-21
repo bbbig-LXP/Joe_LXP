@@ -1,8 +1,6 @@
 package com.project.lxp;
 
-import com.project.lxp.Course;
-import com.project.lxp.CourseRepository;
-import com.project.lxp.Status;
+import com.project.lxp.repository.InMemoryCourseRepository;
 
 public class Main {
 
@@ -21,7 +19,7 @@ public class Main {
 
 
         // 1. 창고 관리자(Repository)를 한 명 생성합니다.
-        CourseRepository repository = new CourseRepository();
+        InMemoryCourseRepository repository = new InMemoryCourseRepository();
 
         // 2. 첫 번째 강좌 객체를 만듭니다. (아직 id는 없음)
         Course course1 = new Course();
