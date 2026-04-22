@@ -1,7 +1,6 @@
 package com.project.lxp.repository;
 
-import com.project.lxp.Course;
-import com.project.lxp.CourseService;
+import com.project.lxp.domain.Course;
 
 public interface CourseRepository {
 

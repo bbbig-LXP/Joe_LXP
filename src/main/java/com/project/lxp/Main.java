@@ -1,5 +1,6 @@
 package com.project.lxp;
 
+import com.project.lxp.domain.Course;
 import com.project.lxp.repository.InMemoryCourseRepository;
 
 public class Main {
