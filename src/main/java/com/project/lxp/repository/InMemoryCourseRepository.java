@@ -1,16 +1,17 @@
 package com.project.lxp.repository;
 
-import com.project.lxp.Course;
-import java.util.HashMap;
+import com.project.lxp.domain.Course;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class InMemoryCourseRepository implements CourseRepository {
 
     //   이 변수는 Repository 객체가 살아있는 동안 계속 데이터를 '기억'합니다.
-    private static Map<Long, Course> store = new HashMap<>();
+    private static final Map<Long, Course> store = new ConcurrentHashMap<>();
 
     //  임시 사용할 Auto Increment : squence = ++sequence
-    private static long sequence = 0L; // Long 타입이라 뒤에 L을 붙여줍니다.
+    private static final AtomicLong sequence = new AtomicLong(0L); // Long 타입이라 뒤에 L을 붙여줍니다.
 
     //새로운 Course 객체를 받아 저장소에 저장합니다.
     @Override
