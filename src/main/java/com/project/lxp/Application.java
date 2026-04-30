@@ -1,17 +1,22 @@
 package com.project.lxp;
 
+import com.mysql.cj.jdbc.JdbcConnection;
 import com.project.lxp.controller.CourseController;
 import com.project.lxp.repository.CourseRepository;
 import com.project.lxp.repository.InMemoryCourseRepository;
-import com.project.lxp.service.CourseService; // package 이름이 Service일 경우를 가정
+import com.project.lxp.service.CourseService;
 import com.project.lxp.domain.Course;
+import java.sql.Connection;
 import java.util.Scanner;
+import javax.sql.DataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
+import java.sql.SQLException;
+import com.project.lxp.repository.JdbcCourseRepository;
+import com.project.lxp.common.DBConnetion;
+
 
 public class Application {
 
-    //CourseRepository의 구현체 InMemoryCourseRepository를 만든다.
-    //repository 객체를 생성자에 넣어주면서 CourseService를 만든다.
-    //그렇게 만든 service 객체를 생성자에 넣어 CourseController를 만든다.
 
     public static void main(String[] args) {
         // 1. 조립영역 (Dependency Injection)
@@ -20,9 +25,21 @@ public class Application {
         InMemoryCourseRepository inMemoryCourseRepository;
         CourseService courseService;
         CourseController courseController;
+//
+//        // --- 데이터베이스 연결 설정 시작 ---
+//        MysqlDataSource dataSource = new MysqlDataSource();
+//        dataSource.setURL("jdbc:mysql://localhost:3306/lxp_db?serverTimezone=UTC"); // <-- URL을 본인 환경에 맞게 수정!
+//        dataSource.setUser("root");    // <-- DB 사용자 이름을 입력!
+//        dataSource.setPassword("dmsqlcao");    // <-- DB 비밀번호를 입력!
+//        // --- 데이터베이스 연결 설정 끝 ---
+//
+        DataSource dataSource = DBConnetion.getDataSource();
+//
 
 
-        CourseRepository courseRepository = new InMemoryCourseRepository();
+
+
+        CourseRepository courseRepository = new JdbcCourseRepository(dataSource);
         CourseService courseService1 = new CourseService(courseRepository);
         courseController = new CourseController (courseService1);
 
